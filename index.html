@@ -138,7 +138,7 @@ body.lk header,body.lk main,body.lk footer,body.lk #md{display:none}
   <div class="nav"><button id="pv" aria-label="Anterior">← Anterior</button><button id="nx" aria-label="Próximo">Próximo →</button><a id="ab" rel="noopener">⬇ Baixar vídeo</a><button id="fc">Fechar ✕</button></div></div>
 </div></div>
 <script>
-const SALT=Uint8Array.from(atob('+PQg8syvXOXuo2MPvEjMFA=='),c=>c.charCodeAt(0));let KEY=null,D=null,TK=0;const URLS={};
+const SALT=Uint8Array.from(atob('xrwD1AAmhAPtDppImA7wLA=='),c=>c.charCodeAt(0));let KEY=null,D=null,TK=0;const URLS={};
 async function derive(pw){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:SALT,iterations:250000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt'])}
 async function dec(u){const r=await fetch(u);if(!r.ok)throw new Error('http');const b=new Uint8Array(await r.arrayBuffer());return crypto.subtle.decrypt({name:'AES-GCM',iv:b.slice(0,12)},KEY,b.slice(12))}
 async function blobUrl(kind,id){const k=kind+id;if(!URLS[k]){const buf=await dec(kind+'/'+id+'.bin');URLS[k]=URL.createObjectURL(new Blob([buf],{type:kind==='v'?'video/mp4':'image/jpeg'}))}return URLS[k]}
